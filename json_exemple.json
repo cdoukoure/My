@@ -1,0 +1,52 @@
+{
+    "data":
+    {
+        "id": 1446412740884,
+        "name": "Risks 1",
+        "description": "I'm the risk 1",
+        "column_collection": [
+                              {
+                              "id": 1446416639512,
+                              "type": "text",
+                              "label": "text label",
+                              "value": "je suis le text 1",
+                              "nullable": false
+                              }, {
+                              "id": 1446416639513,
+                              "type": "number",
+                              "label": "number label",
+                              "value": 98765,
+                              "nullable": true
+                              }, {
+                              "id": 1446416639514,
+                              "type": "date",
+                              "label": "date label",
+                              "value": "2018-02-06",
+                              "nullable": false
+                              }, {
+                              "id": 1446416639515,
+                              "type": "checkbox",
+                              "label": "Checkbox Label",
+                              "value": "option1:value1, option2:value2, option3:value3",
+                              "nullable": true
+                              }
+                              ]
+    },
+    "status": 200,
+    "statusText": "OK",
+    "headers":{
+        "content-type": "application/json"
+    },
+    "config": {
+        "transformRequest": {},
+        "transformResponse": {},
+        "timeout": 0,
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN",
+        "maxContentLength": -1,
+        "headers": { "Accept": "application/json, text/plain, */*" },
+        "method": "get",
+        "url": "http://127.0.0.1:8000/risks_backend/12345678/"
+    },
+    "request": {}
+}
