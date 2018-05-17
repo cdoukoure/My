@@ -620,5 +620,13 @@ hr {
     height: 0;
     overflow: visible;
 }
+video {
+/*object-fit: contain;*/
+/*       object-fit: fill; */
+    object-fit: cover;
+    width:100%;
+    height:450px;
+}
+
 /* is-finish is-process is-wait */
 </style>

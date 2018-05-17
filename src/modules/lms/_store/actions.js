@@ -79,7 +79,7 @@ const getCourses = (context) => {
       description: 'Description description description description description description description description description Description',
       files_dir: '',
       video: 1,
-      image: '',
+      image: null,
       badge: '',
       files: [
                         {id: 1, name: 'comment-creer-un-composent-monofichier.mp4', url: 'https://www.w3schools.com/html/mov_bbb.mp4', size: 8, format: 'video/mp4', date: '08/05/2018'},

@@ -8,6 +8,16 @@
             </el-breadcrumb>
         </el-header>
         <el-main>
+            <el-row style="margin-bottom:20px;">
+                    <el-col :span="2" :offset="22" style="text-align:right;">
+                        <el-tooltip class="item" effect="light" content="Back to course list" placement="top">
+                            <el-button type="danger" icon="el-icon-circle-close" :round="true" size="mini" @click="deactivateSessionOrQuiz()"></el-button>
+                        </el-tooltip>
+                        <!-- <el-tooltip class="item" effect="light" content="Edit course" placement="bottom">
+                         <el-button style="margin-top:10px;" type="warning" icon="el-icon-edit" :round="true" size="mini" @click="edit()"></el-button>
+                         </el-tooltip> -->
+                    </el-col>
+                </el-row>
             <el-form ref="courseForm">
                 <el-card>
                     <el-row>
@@ -29,8 +39,11 @@
                         <el-tab-pane label="Contenu vidéo" name="video">
                             <el-row :gutter="20">
                                 <el-col :span="16">
-
-                                    <video width="100%" height="450" :poster="video.imagePreview" controls>
+                                    <h3 v-show="!video" class="h3">
+                                                                <i class="el-icon-more-outline"></i>
+                                                                Veuillez selection une video dans la galerie
+                                                            </h3>
+                                    <video v-show="video" :poster="video.imagePreview" controls>
                                      <source :src="video.url" :type="video.type">
                                      Your browser does not support the video tag.
                                     </video>
@@ -57,7 +70,7 @@
                                     </el-form-item> -->
                                 </el-col>
                                 <el-col :span="8">
-                                    <video-widget v-on:videoClicked="changeVideoContent"></video-widget>
+                                    <media-widget v-on:mediaClicked="changeMediaContent"></media-widget>
                                 </el-col>
                             </el-row>
                         </el-tab-pane>
@@ -197,7 +210,7 @@
   import { VueEditor } from 'vue2-editor'
   import axios from 'axios'
   import CourseSetupQuizQuestion from './CourseSetupSessionOrQuiz/CourseSetupQuizItem.vue'
-  import VideoWidget from './CourseSetupSessionOrQuiz/VideoCard.vue'
+  import MediaWidget from './CourseSetupSessionOrQuiz/VideoCard.vue'
 
 /*
 
@@ -219,7 +232,7 @@ $json = json_encode($results);
     components: {
       VueEditor,
       CourseSetupQuizQuestion,
-      VideoWidget
+      MediaWidget
     },
     data () {
       return {
@@ -623,14 +636,10 @@ $json = json_encode($results);
         }
         return isJPG && isLt2M
       },
-      changeVideoContent (payload) {
-        // alert(JSON.stringify(payload))
+      changeMediaContent (payload) {
         this.$store.commit('$_lms/SESSION_OR_QUIZ_SET_VIDEO', payload)
-        // var vid = document.getElementById("video1");
-        // alert(vid.duration);
         var myVideo = document.getElementsByTagName('video')[0]
         this.$store.commit('$_lms/SESSION_OR_QUIZ_SET_DURATION', myVideo.duration)
-        // alert(myVideo.duration)
         myVideo.load()
         myVideo.play()
       }
@@ -639,6 +648,37 @@ $json = json_encode($results);
 </script>
 
 <style scoped>
+.el-header {
+    width: 100%;
+    padding: 9px 18px;
+    height: 48px!important;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    color: #fff;
+    font-size: 22px;
+    position: relative;
+    z-index: 0;
+    font-weight: 400;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    background-color: #FFF;
+    border-bottom: 1px solid rgb(235, 238, 245);
+}
+.el-main {
+    padding: 20px;
+    min-height: calc(100vh - 48px);
+    position: relative;
+    float: right;
+    width: 100%;
+    /* width: calc(100% - 260px); */
+    -webkit-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+    transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+}
+.el-breadcrumb {
+    font-size: 1.5rem;
+}
 h1 {
     font-size: 2rem;
     margin-top:10px;
@@ -647,37 +687,26 @@ h2 {
     margin: 0px;
     font-size: 1rem;
 }
-.avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
+.h3 {
+    top: 50%;
+    transform: translateY(50%);
+    color:#C0C4CC;
+    text-align:center;
 }
-.el-upload {
-    display: block;
-    width: 95%;
+.h3 i {
+    font-size:70px;
+    font-weight:thin;
+    display:block;
+    margin-bottom:20px;
 }
-.el-upload-dragger {
-        width:100%;
-        min-height: 280px;
-}
-.avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-}
-.avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-    margin: 100px 0 16px;
-}
-.avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
+video {
+/*object-fit: contain;*/
+/*       object-fit: fill; */
+    object-fit: cover;
+    width:100%;
+    height:450px;
+    -webkit-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+    transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
 }
 .el-form-item {
     margin-bottom: 12px;
