@@ -40,7 +40,7 @@
                                                     <source :src="video.url" :type="video.type">
                                                         Your browser does not support the video tag.
                                                 </video>
-                                                <img v-else :src="image" class="avatar" style="width:100%;height:431px;background-color:#EFEFEF;"/>
+                                                <img v-else-if="image" :src="image" class="avatar" style="width:100%;height:431px;background-color:#EFEFEF;"/>
                                             </el-col>
                                             <el-col :span="8" style="padding:10px;">
                                                 <h2 class="course-price" style="margin:0; font-size:3rem;">{{ price - (price * discount / 100)}} {{ currency }} <small style="color:#909399; text-decoration:line-through;">{{ price }} {{ currency }}</small>
@@ -427,6 +427,13 @@ h3 {
     font-size: 1.2rem;
     margin-top: 2rem;
     margin-bottom: 0.6rem!important;
+}
+video {
+/*object-fit: contain;*/
+/*       object-fit: fill; */
+    object-fit: cover;
+    width:100%;
+    height:450px;
 }
 .skills {
     background-color:#F2F6FC;

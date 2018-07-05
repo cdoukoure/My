@@ -127,7 +127,10 @@ const state = {
   ui: {
     asideWidth: '420px',
     menuVerticalButton: 4,
-    loading: false
+    loading: false,
+    lms: {
+        courseSetupMainTab: '',
+    }
   },
         // TABLE
   tablesList: [],
@@ -282,10 +285,13 @@ const getters = {
   deletedTable: state => state.deletedTable,
   tables: state => state.tablesList,
 
-    //
+  // UI
   isTooltipActive: state => {
     return state.showTooltips
-  }
+  },
+  courseSetupMainTab: state => {
+    return state.ui.lms.courseSetupMainTab
+  },
 }
 
 const mutations = {
@@ -602,6 +608,9 @@ const mutations = {
       state.ui.asideWidth = '420px'
       state.ui.menuVerticalButton = 4
     }
+  },
+  UI_COURSE_SETUP_MAINTAB (state, payload) {
+    state.ui.lms.courseSetupMainTab = payload
   },
     // other mutations are done the same way
   switchTooltips (state, payload) {

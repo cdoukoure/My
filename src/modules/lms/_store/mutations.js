@@ -92,6 +92,10 @@ const COURSE_SETUP_DESELECT = (state) => {
   state.currentCourseId = null
 }
 
+const COURSE_SET_VIDEO = (state, video) => {
+  state.currentCourse.video = video
+}
+
 const COURSE_SET_IMAGE = (state, image) => {
   state.currentCourse.image = image
 }
@@ -389,6 +393,7 @@ export default {
   COURSE_SETUP_NEW,
   COURSE_SETUP_SELECT,
   COURSE_SETUP_DESELECT,
+  COURSE_SET_VIDEO,
   COURSE_SET_IMAGE,
   COURSE_SET_BADGE,
   COURSE_SET_TITLE,
